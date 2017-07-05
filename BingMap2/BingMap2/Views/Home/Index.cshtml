@@ -1,0 +1,74 @@
+﻿@model IEnumerable<BingMap2.Models.Ship>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<head>
+    <style>
+        #map {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            border: 0px
+        }
+    </style>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1>LAROS MAP</h1>
+        <p class="lead"></p>
+        <p></p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Getting started</h2>
+            <p></p>
+        </div>
+        <div class="col-md-4">
+            @foreach (var item in Model)
+            {
+            <p>@item.ShipName</p>
+            }
+        </div>
+        
+
+    </div>
+    <div id="map">here </div>
+    <script>
+        function showMap(position) {
+            var latitude = position.coords.latitude;
+
+            var longitude = position.coords.longitude;
+
+            var map = new Microsoft.Maps.Map($("#map")[0],
+
+                {
+
+                    credentials: "QSJ56V37iKKbwpEugBDc~Vl9Jy0hBTmdWDsVEeUAadQ~AjEJdhwpQsQqJ19C1DLE5zaww9I1Yl5D3TQuafKinpYoNEFanCI8s_hA-iK_BOHj",
+
+                    center: new Microsoft.Maps.Location(latitude, longitude),
+
+                    mapTypeId: Microsoft.Maps.MapTypeId.road,
+
+                    zoom: 15
+
+                });
+
+            var center = map.getCenter();
+            var pin = new Microsoft.Maps.Pushpin(center, { icon: '~BingMap2/Content/img/ship.jpg', width: 50, height: 50, draggable: true });
+            map.entities.push(pin);
+        }
+        window.onload = _ => {
+            showMap({
+                coords: {
+                    latitude: 25.0667, 
+                    longitude:-77.333
+                }
+            })
+        }
+    </script>
+</body>
+<script src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0" type="text/javascript"></script>
