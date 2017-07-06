@@ -11,7 +11,7 @@ namespace BingMap2.Controllers
     public class HomeController : Controller
         {
             private MyContext db = new MyContext();
-            
+        private string gkasmas;
             public ActionResult Index()
             {
             // GET: Ships
